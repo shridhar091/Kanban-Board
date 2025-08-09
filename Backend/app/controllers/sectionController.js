@@ -1,8 +1,6 @@
-// app/controllers/sectionController.js
 const express = require('express');
 const router = express.Router();
 const Section = require('../models/sectionModel');
-const Task = require('../models/taskModel');
 
 // GET all sections with tasks
 router.get('/', async (req, res, next) => {

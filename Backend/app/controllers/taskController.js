@@ -1,4 +1,3 @@
-// app/controllers/taskController.js
 const express = require('express');
 const router = express.Router();
 const Task = require('../models/taskModel');
@@ -27,8 +26,6 @@ router.put('/:id', async (req, res, next) => {
     if (!task) return res.status(404).json({ error: 'Task not found' });
 
     const oldSectionId = task.sectionId.toString();
-
-    // Update task fields
     task.title = title;
     task.description = description;
     task.dueDate = dueDate;

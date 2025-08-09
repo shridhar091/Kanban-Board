@@ -1,4 +1,3 @@
-// config/routes.js
 const express = require('express');
 const router = express.Router();
 const sectionRoutes = require('../app/controllers/sectionController');
