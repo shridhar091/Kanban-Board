@@ -115,7 +115,7 @@ const onDrop = (e) => {
   background-color: #f3f3f3;
   padding: 12px;
   border-radius: 8px;
-  min-width: 250px;
+  width: 250px;
   min-height: 75vh;
   overflow-y: auto;
   transition: background-color 0.3s;
@@ -130,7 +130,11 @@ const onDrop = (e) => {
   justify-content: center;
   color: rgb(113, 113, 113);
 }
-
+.tasks-list{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+}
 .add-task-btn {
   margin-top: 10px;
   width: 100%;

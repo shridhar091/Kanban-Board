@@ -37,15 +37,16 @@ const validateForm = () => {
   if (!dueDate.value) {
     errors.value.dueDate = 'Due date is required'
     valid = false
-  } else {
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-    const selectedDate = new Date(dueDate.value)
-    if (selectedDate < today) {
-      errors.value.dueDate = 'Due date cannot be in the past'
-      valid = false
-    }
-  }
+  } 
+  // else {
+  //   const today = new Date()
+  //   today.setHours(0, 0, 0, 0)
+  //   const selectedDate = new Date(dueDate.value)
+  //   if (selectedDate < today) {
+  //     errors.value.dueDate = 'Due date cannot be in the past'
+  //     valid = false
+  //   }
+  // }
 
   return valid
 }

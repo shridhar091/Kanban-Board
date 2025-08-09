@@ -45,8 +45,10 @@ const dateLabel = computed(() => {
   } else if (diffTime === oneDay) {
     return { text: "Tomorrow", color: "blue" };
   } else {
-    return { text: dueDate.toLocaleDateString(), color: "#555" };
-  }
+  const day = dueDate.getDate().toString().padStart(2, "0");
+  const month = dueDate.toLocaleString("en-US", { month: "short" }); // Aug
+  return { text: `${day} ${month}`, color: "rgb(109, 106, 106)" };
+}
 });
 
 const onDragStart = (event) => {
@@ -70,34 +72,63 @@ const onDragStart = (event) => {
         </div>
       </div>
     </div>
-    <div class="card-header">
-      <small :style="{ color: dateLabel.color }"
-        ><b>{{ dateLabel.text }}</b></small
-      >
-      <p class="description">{{ task.description }}</p>
+
+    <div class="meta-row">
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <img
+          class="avatar"
+          src="https://testingbot.com/free-online-tools/random-avatar/300"
+          alt="User"
+        />
+        <small :style="{ color: dateLabel.color }" class="date-text">
+          <b>{{ dateLabel.text }}</b>
+        </small>
+      </div>
+      <div>
+        <span class="tag">{{ task.description }}</span>
+      </div>
     </div>
-    <small> {{ task.assignee }}</small>
   </div>
 </template>
 
+
 <style scoped>
+
 .task-card {
-  background: white;
-  padding: 12px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: box-shadow 0.2s ease;
+  width: 220px;
+  max-width: 100%;
+}
+
+.task-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0;
+  color: #222;
+  white-space: normal;
+  word-break: break-word; 
 }
 
 .menu {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .dots {
@@ -105,35 +136,66 @@ const onDragStart = (event) => {
   border: none;
   font-size: 18px;
   cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
 }
 
-.description {
-  display: inline-block;
+.dots:hover {
   background-color: #f0f0f0;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 14px;
-  color: #5e5c5c;
-  border: 1px solid #ccc;
 }
 
 .dropdown {
   position: absolute;
-  top: 20px;
+  top: 24px; 
   right: 0;
-  background: #f5f5f5;
-  border-radius: 4px;
-  padding: 5px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  background: white;
+  border-radius: 8px;
+  padding: 6px 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   z-index: 10;
+  min-width: 100px;
 }
 
 .dropdown button {
   background: none;
   border: none;
-  padding: 5px 10px;
+  padding: 8px 12px;
   width: 100%;
   text-align: left;
+  font-size: 14px;
   cursor: pointer;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown button:hover {
+  background-color: #f5f5f5;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.date-text {
+  font-size: 13px;
+}
+
+.tag {
+  background: #f1f1f1;
+  border-radius: 50px;
+  padding: 3px 10px;
+  font-size: 12px;
+  color: #555;
 }
 </style>
